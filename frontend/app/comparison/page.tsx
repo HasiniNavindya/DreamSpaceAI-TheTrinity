@@ -1,9 +1,11 @@
 
 import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/site/SiteHeader";
 import { getNavLinks } from "@/components/site/navLinks";
+
 
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -17,6 +19,7 @@ const navLinks = [
   { href: "#gallery", label: "Gallery" },
   { href: "#about", label: "About Us" },
 ];
+
 
 
 const features = [
@@ -49,6 +52,10 @@ export const metadata: Metadata = {
 export default function ComparisonPage() {
   return (
     <div className="min-h-screen bg-[#f7f5f2] text-on-surface">
+
+      <SiteHeader links={getNavLinks("/comparison")} />
+
+
 
       <SiteHeader links={getNavLinks("/comparison")} />
 
@@ -206,10 +213,18 @@ export default function ComparisonPage() {
 
           <p className="text-sm text-on-surface-variant">┬⌐ 2024 DreamSpace AI. All rights reserved.</p>
 
+
+          <p className="text-sm text-on-surface-variant">┬⌐ 2024 DreamSpace AI. All rights reserved.</p>
+
           <p className="text-sm text-on-surface-variant">© 2024 DreamSpace AI. All rights reserved.</p>
+
 
         </div>
       </footer>
     </div>
   );
+
+}
+
+
 

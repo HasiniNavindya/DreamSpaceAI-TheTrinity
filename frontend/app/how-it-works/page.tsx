@@ -1,8 +1,10 @@
 
 import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/site/SiteHeader";
 import { getNavLinks } from "@/components/site/navLinks";
+
 
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -15,6 +17,7 @@ const navLinks = [
   { href: "/#gallery", label: "Gallery" },
   { href: "/#about", label: "About Us" },
 ];
+
 
 
 const steps = [
@@ -50,6 +53,10 @@ export default function HowItWorksPage() {
 
       <SiteHeader links={getNavLinks("/how-it-works")} />
 
+
+
+      <SiteHeader links={getNavLinks("/how-it-works")} />
+
       <nav className="fixed top-0 z-50 w-full bg-surface/80 shadow-sm backdrop-blur-md">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:px-16">
           <Link href="/" className="font-display text-2xl font-bold text-primary">
@@ -80,6 +87,7 @@ export default function HowItWorksPage() {
           </Link>
         </div>
       </nav>
+
 
 
       <main className="bg-[#f7f5f2] pb-24 pt-32 md:pb-32">
@@ -209,6 +217,9 @@ export default function HowItWorksPage() {
 
             ┬⌐ 2024 DreamSpace AI. All rights reserved.
 
+
+            ┬⌐ 2024 DreamSpace AI. All rights reserved.
+
             © 2024 DreamSpace AI. All rights reserved.
 
           </p>
@@ -216,6 +227,9 @@ export default function HowItWorksPage() {
       </footer>
     </div>
   );
+
+}
+
 
 }
 

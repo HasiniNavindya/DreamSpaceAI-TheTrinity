@@ -8,7 +8,11 @@ const playfair = Playfair_Display({
 
   weight: ["400", "500", "600", "700"],
 
+
+  weight: ["400", "500", "600", "700"],
+
   weight: ["500", "600"],
+
 
 });
 
@@ -24,7 +28,11 @@ export const metadata: Metadata = {
 
     "Discover curated interior design styles and transform your room with AI-powered redesigns.",
 
+
+    "Discover curated interior design styles and transform your room with AI-powered redesigns.",
+
     "Upload your room image and transform it into your dream space in seconds with curated AI interior design styles.",
+
 
 };
 
