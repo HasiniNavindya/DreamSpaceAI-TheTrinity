@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { saveRoomPreview } from "@/lib/transformationStorage";
 import { useRouter } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
 
@@ -57,10 +58,11 @@ export default function ImageUploadForm() {
 
   function onSubmit(event: React.FormEvent) {
     event.preventDefault();
-    if (!file) {
+    if (!file || !previewUrl) {
       setError("Upload a room photo to continue.");
       return;
     }
+    saveRoomPreview(previewUrl);
     router.push("/dashboard");
   }
 

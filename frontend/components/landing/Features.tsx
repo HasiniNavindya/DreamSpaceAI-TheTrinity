@@ -33,7 +33,10 @@ export function Features() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        <div className="group ambient-shadow flex flex-col justify-between rounded-2xl bg-[#fffdfb] p-8 transition-transform duration-300 hover:scale-[1.01] md:col-span-2">
+        <Link
+          href="/styles"
+          className="group ambient-shadow flex flex-col justify-between rounded-2xl bg-[#fffdfb] p-8 transition-transform duration-300 hover:scale-[1.01] md:col-span-2"
+        >
           <div>
             <span className="material-symbols-outlined mb-4 text-4xl text-primary">
               auto_awesome
@@ -63,7 +66,7 @@ export function Features() {
               </div>
             ))}
           </div>
-        </div>
+        </Link>
 
         <div className="group ambient-shadow flex flex-col items-center justify-center rounded-2xl bg-primary-accent p-8 text-center text-white transition-transform duration-300 hover:scale-[1.01]">
           <span className="material-symbols-outlined mb-6 text-5xl">bolt</span>
@@ -75,7 +78,7 @@ export function Features() {
             of your new room in under 15 seconds.
           </p>
           <Link
-            href="#get-started"
+            href="/loading-state"
             className="mt-8 rounded-full bg-white/20 px-6 py-2 text-sm font-medium tracking-wide backdrop-blur transition-colors hover:bg-white/30"
           >
             Try It Now
