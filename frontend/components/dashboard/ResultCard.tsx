@@ -1,6 +1,6 @@
 "use client";
 
-export default function ResultCard({ afterSrc }: { afterSrc: string | null }) {
+export default function ResultCard({ afterSrc, isLoading }: { afterSrc: string | null, isLoading: boolean }) {
   function handleDownload() {
     if (!afterSrc) return;
     const a = document.createElement("a");
@@ -30,8 +30,13 @@ export default function ResultCard({ afterSrc }: { afterSrc: string | null }) {
         </div>
       </div>
 
-      <div className="relative flex-1 rounded-lg overflow-hidden group bg-[#efebe8]">
-        {afterSrc ? (
+      <div className="relative flex-1 rounded-lg overflow-hidden group bg-[#efebe8] min-h-[400px]">
+        {isLoading ? (
+          <div className="flex flex-col h-full items-center justify-center text-[#a8968f] gap-4">
+            <div className="w-12 h-12 border-4 border-[#c46a4a] border-t-transparent rounded-full animate-spin"></div>
+            <p className="font-medium animate-pulse text-[#c46a4a]">Designing your space...</p>
+          </div>
+        ) : afterSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img alt="AI Generated Interior" className="w-full h-full object-cover rounded-lg" src={afterSrc} />
         ) : (
