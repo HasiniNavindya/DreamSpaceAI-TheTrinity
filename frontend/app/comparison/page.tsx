@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { href: "/", label: "Home", active: true },
-  { href: "/comparison", label: "Comparison" },
+  { href: "/", label: "Home" },
+  { href: "/comparison", label: "Comparison", active: true },
   { href: "/how-it-works", label: "How It Works" },
   { href: "#features", label: "Features" },
   { href: "#gallery", label: "Gallery" },
@@ -33,12 +33,12 @@ const features = [
 ];
 
 export const metadata: Metadata = {
-  title: "DreamSpace AI | Visualize Your Dream Space",
+  title: "Comparison | DreamSpace AI",
   description:
-    "Visualize your dream space with AI-powered room transformations, style previews, and fast photorealistic redesigns.",
+    "Compare before and after interior redesigns with a polished DreamSpace AI showcase page.",
 };
 
-export default function Home() {
+export default function ComparisonPage() {
   return (
     <div className="min-h-screen bg-[#f7f5f2] text-on-surface">
       <header className="fixed top-0 z-50 w-full border-b border-[#e9ddd4] bg-surface/85 backdrop-blur-md">
@@ -64,7 +64,7 @@ export default function Home() {
           </div>
 
           <Link
-            href="/comparison"
+            href="/how-it-works"
             className="rounded-full bg-primary px-6 py-3 text-sm font-medium tracking-wide text-on-primary transition-all duration-150 hover:scale-105 active:scale-95"
           >
             Get Started
@@ -76,15 +76,14 @@ export default function Home() {
         <section className="mx-auto max-w-7xl px-6 md:px-16">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-5 inline-flex rounded-full bg-primary-fixed px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-on-primary-fixed shadow-sm">
-              Transformation showcase
+              Comparison view
             </div>
             <h1 className="font-display text-5xl font-semibold tracking-tight text-on-surface md:text-[64px] md:leading-18">
-              Visualize Your Dream Space
+              Compare the Transformation
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-secondary">
-              Experience the power of AI-driven interior design. Upload your room and
-              see it transformed from minimal to maximal, modern to serene, in
-              seconds.
+              See the before-and-after relationship in one polished view, designed to
+              make the change feel immediate and measurable.
             </p>
           </div>
 
