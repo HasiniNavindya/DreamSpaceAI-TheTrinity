@@ -1,12 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { saveTransformationPreviews } from "@/lib/transformationStorage";
 import Sidebar from "./Sidebar";
 import UploadPanel from "./UploadPanel";
 import ResultCard from "./ResultCard";
 import ComparisonSlider from "./ComparisonSlider";
 
 export default function DashboardShell() {
+  const router = useRouter();
   const [beforeSrc, setBeforeSrc] = useState<string | null>(null);
   const [afterSrc, setAfterSrc] = useState<string | null>(null);
   const [roomType, setRoomType] = useState("Living Room");
@@ -19,8 +22,11 @@ export default function DashboardShell() {
   }
 
   function generate() {
-    // Simulate generation: set after image to a public asset.
-    setAfterSrc("/landingImg1.svg");
+    const roomUrl = beforeSrc ?? "/landingImg2.svg";
+    const resultUrl = "/landingImg1.svg";
+    setAfterSrc(resultUrl);
+    saveTransformationPreviews(roomUrl, resultUrl);
+    router.push("/final-stage");
   }
 
   return (

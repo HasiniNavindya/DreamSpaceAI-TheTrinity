@@ -84,8 +84,4 @@ export function Features() {
       </div>
     </section>
   );
-
 }
-
-}
-

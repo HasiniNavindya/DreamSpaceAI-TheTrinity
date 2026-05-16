@@ -1,26 +1,8 @@
-
-import type { Metadata } from "next";
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/site/SiteHeader";
 import { getNavLinks } from "@/components/site/navLinks";
-
-
-import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/comparison", label: "Comparison", active: true },
-  { href: "/how-it-works", label: "How It Works" },
-  { href: "#features", label: "Features" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#about", label: "About Us" },
-];
-
-
 
 const features = [
   {
@@ -52,44 +34,7 @@ export const metadata: Metadata = {
 export default function ComparisonPage() {
   return (
     <div className="min-h-screen bg-[#f7f5f2] text-on-surface">
-
       <SiteHeader links={getNavLinks("/comparison")} />
-
-
-
-      <SiteHeader links={getNavLinks("/comparison")} />
-
-      <header className="fixed top-0 z-50 w-full border-b border-[#e9ddd4] bg-surface/85 backdrop-blur-md">
-        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:px-16">
-          <Link href="/" className="font-display text-2xl font-bold text-primary">
-            DreamSpace AI
-          </Link>
-
-          <div className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={`text-sm font-medium tracking-wide transition-colors hover:text-primary ${
-                  link.active
-                    ? "border-b-2 border-primary pb-1 font-bold text-primary"
-                    : "text-secondary"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          <Link
-            href="/how-it-works"
-            className="rounded-full bg-primary px-6 py-3 text-sm font-medium tracking-wide text-on-primary transition-all duration-150 hover:scale-105 active:scale-95"
-          >
-            Get Started
-          </Link>
-        </nav>
-      </header>
-
 
       <main className="pt-28 md:pt-32">
         <section className="mx-auto max-w-7xl px-6 md:px-16">
@@ -210,21 +155,9 @@ export default function ComparisonPage() {
         </div>
 
         <div className="mx-auto mt-12 max-w-7xl px-6 md:px-16">
-
           <p className="text-sm text-on-surface-variant">┬⌐ 2024 DreamSpace AI. All rights reserved.</p>
-
-
-          <p className="text-sm text-on-surface-variant">┬⌐ 2024 DreamSpace AI. All rights reserved.</p>
-
-          <p className="text-sm text-on-surface-variant">© 2024 DreamSpace AI. All rights reserved.</p>
-
-
         </div>
       </footer>
     </div>
   );
-
 }
-
-
-
