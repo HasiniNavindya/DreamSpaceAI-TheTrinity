@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SiteHeader from "@/components/site/SiteHeader";
 import { getNavLinks } from "@/components/site/navLinks";
 import FinalStageExperience from "@/components/final-stage/FinalStageExperience";
-import FinalStageFooter from "@/components/final-stage/FinalStageFooter";
+import SiteFooter from "@/components/site/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Your Dream Space Awaits | DreamSpace AI",
@@ -19,7 +19,7 @@ export default function FinalStagePage() {
         ctaLabel="Get Started Again"
       />
       <FinalStageExperience />
-      <FinalStageFooter />
+      <SiteFooter />
     </div>
   );
 }

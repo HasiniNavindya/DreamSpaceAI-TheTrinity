@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import { getNavLinks } from "@/components/site/navLinks";
 import MoodboardGrid from "@/components/moodboard/MoodboardGrid";
@@ -16,6 +17,7 @@ export default function MoodboardPage() {
       <main className="mx-auto w-full max-w-[2000px] px-4 pb-8 pt-24 md:px-8">
         <MoodboardGrid />
       </main>
+      <SiteFooter />
     </div>
   );
 }

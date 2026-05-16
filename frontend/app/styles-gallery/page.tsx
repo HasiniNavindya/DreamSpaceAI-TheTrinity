@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SiteHeader from "@/components/site/SiteHeader";
 import { getNavLinks } from "@/components/site/navLinks";
 import StylesGalleryGrid from "@/components/styles-gallery/StylesGalleryGrid";
-import StylesGalleryFooter from "@/components/styles-gallery/StylesGalleryFooter";
+import SiteFooter from "@/components/site/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Explore Interior Styles | DreamSpace AI",
@@ -17,7 +17,7 @@ export default function StylesGalleryPage() {
       <main className="mx-auto max-w-7xl px-6 pb-40 pt-32 md:px-16">
         <StylesGalleryGrid />
       </main>
-      <StylesGalleryFooter />
+      <SiteFooter />
     </div>
   );
 }
