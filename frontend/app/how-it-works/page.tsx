@@ -1,7 +1,21 @@
-﻿import type { Metadata } from "next";
+
+import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/site/SiteHeader";
 import { getNavLinks } from "@/components/site/navLinks";
+
+import type { Metadata } from "next";
+import Link from "next/link";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/#styles", label: "Styles" },
+  { href: "/how-it-works", label: "How It Works", active: true },
+  { href: "/#features", label: "Features" },
+  { href: "/#gallery", label: "Gallery" },
+  { href: "/#about", label: "About Us" },
+];
+
 
 const steps = [
   {
@@ -33,7 +47,40 @@ export const metadata: Metadata = {
 export default function HowItWorksPage() {
   return (
     <div className="min-h-screen bg-surface text-on-surface">
+
       <SiteHeader links={getNavLinks("/how-it-works")} />
+
+      <nav className="fixed top-0 z-50 w-full bg-surface/80 shadow-sm backdrop-blur-md">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:px-16">
+          <Link href="/" className="font-display text-2xl font-bold text-primary">
+            DreamSpace AI
+          </Link>
+
+          <div className="hidden items-center gap-8 md:flex">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={`text-sm font-medium tracking-wide transition-colors hover:text-primary ${
+                  link.active
+                    ? "border-b-2 border-primary pb-1 font-bold text-primary"
+                    : "text-secondary"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          <Link
+            href="/#get-started"
+            className="rounded-full bg-primary px-6 py-3 text-sm font-medium tracking-wide text-on-primary transition-all duration-150 hover:scale-105 active:scale-95"
+          >
+            Get Started
+          </Link>
+        </div>
+      </nav>
+
 
       <main className="bg-[#f7f5f2] pb-24 pt-32 md:pb-32">
         <div className="mx-auto max-w-7xl px-6 md:px-16">
@@ -159,10 +206,18 @@ export default function HowItWorksPage() {
 
         <div className="mx-auto mt-12 max-w-7xl border-t border-outline-variant/30 px-6 pt-8 md:px-16">
           <p className="text-base text-on-surface-variant">
+
             ┬⌐ 2024 DreamSpace AI. All rights reserved.
+
+            © 2024 DreamSpace AI. All rights reserved.
+
           </p>
         </div>
       </footer>
     </div>
   );
+
 }
+
+}
+
