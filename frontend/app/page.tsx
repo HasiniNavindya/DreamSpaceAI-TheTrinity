@@ -1,3 +1,9 @@
+
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import SiteHeader from "@/components/site/SiteHeader";
+import { getNavLinks } from "@/components/site/navLinks";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +16,7 @@ const navLinks = [
   { href: "#gallery", label: "Gallery" },
   { href: "#about", label: "About Us" },
 ];
+
 
 const features = [
   {
@@ -41,6 +48,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#f7f5f2] text-on-surface">
+
+      <SiteHeader links={getNavLinks("/")} />
+
       <header className="fixed top-0 z-50 w-full border-b border-[#e9ddd4] bg-surface/85 backdrop-blur-md">
         <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:px-16">
           <Link href="/" className="font-display text-2xl font-bold text-primary">
@@ -71,6 +81,7 @@ export default function Home() {
           </Link>
         </nav>
       </header>
+
 
       <main className="pt-28 md:pt-32">
         <section className="mx-auto max-w-7xl px-6 md:px-16">
@@ -192,7 +203,11 @@ export default function Home() {
         </div>
 
         <div className="mx-auto mt-12 max-w-7xl px-6 md:px-16">
+
+          <p className="text-sm text-on-surface-variant">┬⌐ 2024 DreamSpace AI. All rights reserved.</p>
+
           <p className="text-sm text-on-surface-variant">© 2024 DreamSpace AI. All rights reserved.</p>
+
         </div>
       </footer>
     </div>
