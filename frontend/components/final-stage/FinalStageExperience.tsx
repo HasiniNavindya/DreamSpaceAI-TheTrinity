@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import ComparisonSlider from "@/components/dashboard/ComparisonSlider";
 import { getResultPreview, getRoomPreview } from "@/lib/transformationStorage";
 
 const STATUS_STEPS = [
@@ -32,7 +33,7 @@ export default function FinalStageExperience() {
 
   useEffect(() => {
     setRoomPreview(getRoomPreview());
-    setResultPreview(getResultPreview() ?? "/landingImg1.svg");
+    setResultPreview(getResultPreview() ?? "/landingImg1.png");
   }, []);
 
   useEffect(() => {
@@ -61,7 +62,11 @@ export default function FinalStageExperience() {
     anchor.remove();
   }
 
+  const beforeSrc = roomPreview ?? "/landingImg2.png";
+  const afterSrc = resultPreview ?? "/landingImg1.png";
+
   return (
+    <>
     <section className="final-stage-bg relative flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center overflow-hidden px-6 py-16">
       <span className="final-stage-orb final-stage-orb-a" aria-hidden />
       <span className="final-stage-orb final-stage-orb-b" aria-hidden />
@@ -172,7 +177,7 @@ export default function FinalStageExperience() {
 
         <div className="mt-12 flex items-center justify-center gap-3">
           <div className="flex -space-x-2">
-            {["/landingImg1.svg", "/landingImg2.svg", "/landingImg1.svg"].map((src, i) => (
+            {["/landingImg1.png", "/landingImg2.png", "/landingImg1.png"].map((src, i) => (
               <span
                 key={`${src}-${i}`}
                 className="relative block h-9 w-9 overflow-hidden rounded-full border-2 border-[#f7f5f2] shadow-sm"
@@ -195,5 +200,17 @@ export default function FinalStageExperience() {
         )}
       </article>
     </section>
+
+    {isComplete && (
+      <section className="mx-auto w-full max-w-5xl px-6 pb-24 pt-4 md:px-16">
+        <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-lowest p-8 shadow-[0_12px_32px_rgba(43,43,43,0.04)] md:p-10">
+          <h2 className="mb-8 font-display text-2xl font-medium text-on-surface md:text-3xl">
+            Before / After Comparison
+          </h2>
+          <ComparisonSlider beforeSrc={beforeSrc} afterSrc={afterSrc} />
+        </div>
+      </section>
+    )}
+    </>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import MoodboardPin from "@/components/moodboard/MoodboardPin";
+import MoodboardSavedDialog from "@/components/moodboard/MoodboardSavedDialog";
 import {
   MOODBOARD_CATEGORIES,
   MOODBOARD_ITEMS,
@@ -20,6 +21,7 @@ export default function MoodboardGrid() {
   const [category, setCategory] = useState<MoodboardCategory>("all");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [styleName, setStyleName] = useState<string | null>(null);
+  const [savedDialogOpen, setSavedDialogOpen] = useState(false);
 
   useEffect(() => {
     const styleId = getSelectedStyle();
@@ -48,6 +50,15 @@ export default function MoodboardGrid() {
 
   const savedCount = selectedIds.length;
 
+  const selectedItems = useMemo(
+    () => MOODBOARD_ITEMS.filter((item) => selectedIds.includes(item.id)),
+    [selectedIds],
+  );
+
+  function removeFromSelection(id: string) {
+    setSelectedIds((prev) => prev.filter((x) => x !== id));
+  }
+
   return (
     <>
       <div className="sticky top-20 z-30 -mx-4 border-b border-[#e9e9e9] bg-white/95 px-4 pb-3 pt-2 backdrop-blur-md md:-mx-8 md:px-8">
@@ -62,9 +73,13 @@ export default function MoodboardGrid() {
               </p>
             </div>
             {savedCount > 0 && (
-              <span className="rounded-full bg-[#f1f1f1] px-3 py-1 text-sm font-semibold text-[#111]">
+              <button
+                type="button"
+                onClick={() => setSavedDialogOpen(true)}
+                className="rounded-full bg-[#f1f1f1] px-3 py-1.5 text-sm font-semibold text-[#111] transition-colors hover:bg-[#e2e2e2]"
+              >
                 {savedCount} saved
-              </span>
+              </button>
             )}
           </div>
 
@@ -102,6 +117,13 @@ export default function MoodboardGrid() {
           ))}
         </div>
       </section>
+
+      <MoodboardSavedDialog
+        open={savedDialogOpen}
+        items={selectedItems}
+        onClose={() => setSavedDialogOpen(false)}
+        onRemove={removeFromSelection}
+      />
 
       <div className="pointer-events-none fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4">
         <div className="pointer-events-auto flex items-center gap-2 rounded-full border border-[#e9e9e9] bg-white p-2 shadow-[0_4px_24px_rgba(0,0,0,0.12)]">
