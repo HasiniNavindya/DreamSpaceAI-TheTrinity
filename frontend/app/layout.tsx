@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import ToasterProvider from "@/components/ToasterProvider";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -37,6 +38,7 @@ export default function RootLayout({
         className={`${playfair.variable} ${inter.variable} min-h-full font-body antialiased`}
       >
         {children}
+        <ToasterProvider />
       </body>
     </html>
   );

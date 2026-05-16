@@ -1,5 +1,6 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
+import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import { getNavLinks } from "@/components/site/navLinks";
 
@@ -90,79 +91,7 @@ export default function HowItWorksPage() {
         </div>
       </main>
 
-      <footer className="w-full border-t border-outline-variant bg-surface-container py-24">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 md:grid-cols-4 md:px-16">
-          <div className="flex flex-col gap-4">
-            <div className="font-display text-xl font-bold text-primary">
-              DreamSpace AI
-            </div>
-            <p className="text-base leading-6 text-on-surface-variant">
-              Transforming homes with intelligent, editorial-grade interior
-              design.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <span className="text-sm font-bold tracking-wide text-primary">
-              Company
-            </span>
-            <Link
-              href="/#about"
-              className="text-base text-on-surface-variant transition-colors hover:text-primary"
-            >
-              About Us
-            </Link>
-            <Link
-              href="/#contact"
-              className="text-base text-on-surface-variant transition-colors hover:text-primary"
-            >
-              Contact
-            </Link>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <span className="text-sm font-bold tracking-wide text-primary">
-              Legal
-            </span>
-            <Link
-              href="/privacy"
-              className="text-base text-on-surface-variant transition-colors hover:text-primary"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-base text-on-surface-variant transition-colors hover:text-primary"
-            >
-              Terms of Service
-            </Link>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <span className="text-sm font-bold tracking-wide text-primary">
-              Social
-            </span>
-            <Link
-              href="https://instagram.com"
-              className="text-base text-on-surface-variant transition-colors hover:text-primary"
-            >
-              Instagram
-            </Link>
-            <Link
-              href="https://pinterest.com"
-              className="text-base text-on-surface-variant transition-colors hover:text-primary"
-            >
-              Pinterest
-            </Link>
-          </div>
-        </div>
-
-        <div className="mx-auto mt-12 max-w-7xl border-t border-outline-variant/30 px-6 pt-8 md:px-16">
-          <p className="text-base text-on-surface-variant">
-            ┬⌐ 2024 DreamSpace AI. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
