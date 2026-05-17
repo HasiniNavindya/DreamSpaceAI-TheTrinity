@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import ToasterProvider from "@/components/ToasterProvider";
 import "./globals.css";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
-
   weight: ["400", "500", "600", "700"],
-
-
-  weight: ["400", "500", "600", "700"],
-
-  weight: ["500", "600"],
-
-
 });
 
 const inter = Inter({
@@ -25,15 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "DreamSpace AI | Redesign Your Space",
   description:
-
-    "Discover curated interior design styles and transform your room with AI-powered redesigns.",
-
-
-    "Discover curated interior design styles and transform your room with AI-powered redesigns.",
-
     "Upload your room image and transform it into your dream space in seconds with curated AI interior design styles.",
-
-
 };
 
 export default function RootLayout({
@@ -53,6 +38,7 @@ export default function RootLayout({
         className={`${playfair.variable} ${inter.variable} min-h-full font-body antialiased`}
       >
         {children}
+        <ToasterProvider />
       </body>
     </html>
   );
