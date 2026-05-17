@@ -2,19 +2,26 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   INTERIOR_STYLES,
   getStyleGalleryImage,
   type InteriorStyle,
 } from "@/lib/interiorStyles";
-import { saveSelectedStyle } from "@/lib/transformationStorage";
+import { getSelectedStyle, saveSelectedStyle } from "@/lib/transformationStorage";
 import StylesGalleryFeatured from "@/components/styles-gallery/StylesGalleryFeatured";
 
 export default function StylesGalleryGrid() {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const savedStyleId = getSelectedStyle();
+    if (savedStyleId) {
+      setSelectedId(savedStyleId);
+    }
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -28,11 +35,26 @@ export default function StylesGalleryGrid() {
   }
 
   function toggleStyle(style: InteriorStyle) {
-    setSelectedId((current) => (current === style.id ? null : style.id));
+    setSelectedId((current) => {
+      const next = current === style.id ? null : style.id;
+      saveSelectedStyle(next);
+      return next;
+    });
+  }
+
+  function selectLuxuryStyle() {
+    setSelectedId("luxury");
+    saveSelectedStyle("luxury");
+
+    requestAnimationFrame(() => {
+      document
+        .getElementById("style-card-luxury")
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
   }
 
   return (
-    <>
+    <div className="flex flex-1 flex-col pb-16">
       <header className="mb-16 space-y-6 text-center">
         <h1 className="font-display text-4xl font-semibold tracking-tight text-on-surface md:text-6xl md:leading-[72px]">
           Explore Interior Styles
@@ -61,6 +83,7 @@ export default function StylesGalleryGrid() {
           return (
             <button
               key={style.id}
+              id={style.id === "luxury" ? "style-card-luxury" : undefined}
               type="button"
               onClick={() => toggleStyle(style)}
               className={`style-card group relative h-[500px] cursor-pointer overflow-hidden rounded-2xl text-left ambient-shadow transition-all duration-300 hover:scale-[1.03] hover-shadow ${
@@ -75,9 +98,11 @@ export default function StylesGalleryGrid() {
                 sizes="(max-width: 1024px) 50vw, 33vw"
               />
               <div className="glass-overlay absolute inset-0 flex flex-col justify-end p-8">
-                <h3 className="mb-4 font-display text-2xl font-bold text-white">{style.name}</h3>
+                <h3 className="mb-4 font-display text-2xl font-bold text-white drop-shadow-sm">
+                  {style.name}
+                </h3>
                 <div className="card-inner-btn">
-                  <span className="block w-full rounded-full bg-[#C86B4A] py-4 text-center text-sm font-medium tracking-wide text-white">
+                  <span className="flex min-h-[52px] w-full items-center justify-center rounded-full bg-[#C86B4A] px-6 py-3 text-center text-sm font-semibold leading-none tracking-wide text-white shadow-md transition-all duration-300 group-hover:brightness-110">
                     {isSelected ? "Selected" : "Select Style"}
                   </span>
                 </div>
@@ -92,15 +117,17 @@ export default function StylesGalleryGrid() {
         })}
       </div>
 
-      <StylesGalleryFeatured onSelectLuxury={() => setSelectedId("luxury")} />
+      <StylesGalleryFeatured
+        onSelectLuxury={selectLuxuryStyle}
+        isLuxurySelected={selectedId === "luxury"}
+      />
 
-      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-outline-variant/40 bg-surface/95 px-6 py-4 backdrop-blur-md">
+      <div className="mt-16 border-t border-outline-variant/40 pt-8">
         <div className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row">
           <button
             type="button"
             onClick={() => goToMoodboard(true)}
-            disabled={!selectedId}
-            className="w-full rounded-full bg-primary px-10 py-3 text-sm font-medium tracking-wide text-on-primary transition-all hover:scale-105 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+            className="w-full rounded-full bg-primary px-10 py-3 text-sm font-medium tracking-wide text-on-primary transition-all hover:scale-105 sm:w-auto"
           >
             Visit Moodboard
           </button>
@@ -113,6 +140,6 @@ export default function StylesGalleryGrid() {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -4,12 +4,22 @@ import Image from "next/image";
 
 type StylesGalleryFeaturedProps = {
   onSelectLuxury: () => void;
+  isLuxurySelected?: boolean;
 };
 
-export default function StylesGalleryFeatured({ onSelectLuxury }: StylesGalleryFeaturedProps) {
+export default function StylesGalleryFeatured({
+  onSelectLuxury,
+  isLuxurySelected = false,
+}: StylesGalleryFeaturedProps) {
   return (
     <section className="mt-[120px]">
-      <div className="flex flex-col overflow-hidden rounded-2xl border border-outline-variant/30 bg-surface-container-lowest ambient-shadow lg:flex-row">
+      <div
+        className={`flex flex-col overflow-hidden rounded-2xl border bg-surface-container-lowest ambient-shadow transition-all lg:flex-row ${
+          isLuxurySelected
+            ? "border-primary ring-4 ring-primary/20 ring-offset-2 ring-offset-background"
+            : "border-outline-variant/30"
+        }`}
+      >
         <div className="relative h-80 lg:h-auto lg:w-2/3">
           <Image
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMX629V9Oii7OnbU_682yQ9i9cZuzTvzlpFAbETWg4Uj2efwxXBGD9LnLMl_fXtEhnM2d3gOGs0OYkXKa85Sijsq7q8bhhkqxUhnJxuyCKe8jN0lramfmU5Lnr1wo3Pbv8MxphdZKKRPh6kSsBqnMioLMSFyMhaMYXx2DUcXl9CEE-eIjsLuiZ6mtBcxGkOkxrtL53rNf1VXQikKuWYkUaoQ6mk_Md420eLyRyhrg-5EX9cuS_p1jqUO9QZFD9i2yS5TKF8MRq5veA"
@@ -61,9 +71,20 @@ export default function StylesGalleryFeatured({ onSelectLuxury }: StylesGalleryF
           <button
             type="button"
             onClick={onSelectLuxury}
-            className="rounded-full bg-primary px-8 py-4 text-sm font-medium tracking-wide text-on-primary transition-transform hover:scale-105"
+            className={`flex min-h-[52px] items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-semibold tracking-wide transition-all hover:scale-105 ${
+              isLuxurySelected
+                ? "bg-primary/90 text-on-primary"
+                : "bg-primary text-on-primary"
+            }`}
           >
-            Select Luxury Style
+            {isLuxurySelected ? (
+              <>
+                <span className="material-symbols-outlined text-lg">check_circle</span>
+                Luxury Style Selected
+              </>
+            ) : (
+              "Select Luxury Style"
+            )}
           </button>
         </div>
       </div>

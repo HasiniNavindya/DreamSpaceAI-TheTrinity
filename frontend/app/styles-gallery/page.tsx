@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 
 export default function StylesGalleryPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader links={getNavLinks("")} />
-      <main className="mx-auto max-w-7xl px-6 pb-40 pt-32 md:px-16">
+      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 pt-32 md:px-16">
         <StylesGalleryGrid />
       </main>
       <SiteFooter />
