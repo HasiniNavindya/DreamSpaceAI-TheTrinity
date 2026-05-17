@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-const ROOM_TYPES = [
+export const ROOM_TYPES = [
   "Living Room",
   "Bedroom",
   "Kitchen",
@@ -36,7 +36,7 @@ export default function DashboardConfigurePanel({
 
       <div className="space-y-2">
         <label className="ml-1 text-xs uppercase tracking-wider text-[#8e7e76]">
-          Room Type
+          Room Type <span className="text-primary">*</span>
         </label>
         <div className="relative">
           <select
@@ -103,7 +103,7 @@ export default function DashboardConfigurePanel({
         disabled={isLoading}
         className="mt-8 w-full rounded-full bg-primary py-4 text-lg font-medium text-on-primary shadow-sm transition-all hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
       >
-        {isLoading ? "Generating..." : "Generate Dream Space ✨"}
+        {isLoading ? "Starting..." : "Generate Dream Space ✨"}
       </button>
     </div>
   );

@@ -5,15 +5,17 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { INTERIOR_STYLES } from "@/lib/interiorStyles";
 import {
+  clearResultPreview,
   getMoodboardSelections,
   getRoomPreview,
   getRoomType,
   getSelectedStyle,
   saveRoomType,
   saveTransformationConfig,
-  saveTransformationPreviews,
 } from "@/lib/transformationStorage";
-import DashboardConfigurePanel from "./DashboardConfigurePanel";
+import DashboardConfigurePanel, {
+  ROOM_TYPES,
+} from "./DashboardConfigurePanel";
 import ResultCard from "./ResultCard";
 
 export default function DashboardShell() {
@@ -22,7 +24,7 @@ export default function DashboardShell() {
   const [roomType, setRoomType] = useState("Living Room");
   const [selectedStyleName, setSelectedStyleName] = useState<string | null>(null);
   const [moodboardCount, setMoodboardCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isStarting, setIsStarting] = useState(false);
 
   function refreshSelections() {
     const preview = getRoomPreview();
@@ -55,54 +57,30 @@ export default function DashboardShell() {
     saveRoomType(value);
   }
 
-  async function generate() {
-    if (!roomPreview) return;
-
-    const styleId = getSelectedStyle();
-    if (!styleId) {
-      toast.error("Please select a style from the Styles Gallery first.");
+  function generate() {
+    if (!roomPreview) {
+      toast.error("Please upload a room photo first.");
       return;
     }
 
-    const style = INTERIOR_STYLES.find((s) => s.id === styleId);
-    const styleLabel = style?.name ?? styleId;
+    const trimmedRoomType = roomType.trim();
+    if (!trimmedRoomType || !ROOM_TYPES.includes(trimmedRoomType as (typeof ROOM_TYPES)[number])) {
+      toast.error("Please select a room type.");
+      return;
+    }
+
+    const styleId = getSelectedStyle();
     const moodboardItemIds = getMoodboardSelections();
 
     saveTransformationConfig({
-      roomType,
+      roomType: trimmedRoomType,
       styleId,
       moodboardItemIds,
     });
 
-    setIsLoading(true);
-
-    try {
-      const res = await fetch("/api/generate-room", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          image_url: roomPreview,
-          style: styleLabel,
-          room_type: roomType,
-        }),
-      });
-
-      const result = await res.json();
-
-      if (result.success) {
-        const resultUrl = result.data.generatedImage;
-        saveTransformationPreviews(roomPreview, resultUrl);
-        toast.success("Design generated successfully!");
-        router.push("/final-stage");
-      } else {
-        toast.error(result.error || "Failed to generate design");
-      }
-    } catch (error) {
-      console.error("Generation Error:", error);
-      toast.error("Something went wrong during generation.");
-    } finally {
-      setIsLoading(false);
-    }
+    clearResultPreview();
+    setIsStarting(true);
+    router.push("/final-stage");
   }
 
   return (
@@ -124,7 +102,7 @@ export default function DashboardShell() {
             selectedStyleName={selectedStyleName}
             moodboardCount={moodboardCount}
             onGenerate={generate}
-            isLoading={isLoading}
+            isLoading={isStarting}
           />
         </div>
 
@@ -133,7 +111,6 @@ export default function DashboardShell() {
             imageSrc={roomPreview}
             styleLabel={selectedStyleName}
             roomType={roomType}
-            isLoading={isLoading}
           />
         </div>
       </div>

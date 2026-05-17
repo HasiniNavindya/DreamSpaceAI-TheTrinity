@@ -62,6 +62,11 @@ export function getResultPreview(): string | null {
   return sessionStorage.getItem(RESULT_PREVIEW_KEY);
 }
 
+export function clearResultPreview() {
+  if (typeof window === "undefined") return;
+  sessionStorage.removeItem(RESULT_PREVIEW_KEY);
+}
+
 export function saveRoomType(roomType: string) {
   if (typeof window === "undefined") return;
   sessionStorage.setItem(ROOM_TYPE_KEY, roomType);
