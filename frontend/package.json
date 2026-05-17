@@ -25,7 +25,6 @@
   },
   "devDependencies": {
     "@next/swc-wasm-nodejs": "^16.2.6",
-    "@next/swc-win32-x64-msvc": "^16.2.6",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
